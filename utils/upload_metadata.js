@@ -1,4 +1,5 @@
 require('dotenv').config();
+const config = require('../src/config');
 
 const fs = require('fs');
 const path = require('path');
@@ -19,6 +20,22 @@ const client = IPFS.create({
   }
 });
 
+function updateBaseUriInSettings(newUri) {
+  const settingsFilePath = path.join(__dirname, '..', 'src', 'config.js');
+
+  let fileContent = fs.readFileSync(settingsFilePath, 'utf-8');
+
+  // Use a regular expression to replace the baseUri value
+  const regex = /"baseUri": "(.*)"/;
+  if (regex.test(fileContent)) {
+    fileContent = fileContent.replace(regex, `"baseUri": "${newUri}"`);
+    fs.writeFileSync(settingsFilePath, fileContent, 'utf-8');
+    console.log('baseUri updated successfully in settings.js');
+  } else {
+    console.error('Property baseUri not found in settings.js');
+  }
+}
+
 async function addDirectoryToIPFS(directoryPath) {
   const files = [];
 
@@ -33,8 +50,13 @@ async function addDirectoryToIPFS(directoryPath) {
 
   try {
     const result = await client.add(files, { wrapWithDirectory: true });
+    const newUri = `https://ipfsnerdservices.infura-ipfs.io/ipfs/${result.cid}/`;
     console.log(`Folder uploaded successfully. CID: ${result.cid}`);
-    console.log(`https://ipfsnerdservices.infura-ipfs.io/ipfs/${result.cid}`);
+    console.log(newUri);
+    
+    // Update the baseUri in the settings.js file
+    updateBaseUriInSettings(newUri);
+
     return result.cid;
   } catch (error) {
     console.error('Error uploading folder to IPFS:', error);

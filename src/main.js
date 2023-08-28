@@ -17,7 +17,7 @@ const {
   debugLogs,
   extraMetadata,
   text,
-  namePrefix,
+  tokenName,
   network,
   solanaMetadata,
   gif,
@@ -131,7 +131,7 @@ const drawBackground = () => {
 const addMetadata = (_dna, _edition) => {
   let dateTime = Date.now();
   let tempMetadata = {
-    name: `${namePrefix} #${_edition}`,
+    name: `${tokenName} #${_edition}`,
     description: description,
     image: `${baseUri}/${_edition}.png`,
     dna: sha1(_dna),

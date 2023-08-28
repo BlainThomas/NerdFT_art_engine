@@ -1,11 +1,14 @@
 module.exports = {
+  "tokenName": "Your Collection",
+  "tokenSymbol": "Collection Symbol",
+  "description": "Remember to replace this description",
+  "royaltiesPercentage": 5,
+  "royaltiesReceiver": '0x0800787f61DEf072bA8F2E86d4B48B70dA64bD77',
   "format": {
     "width": 512,
     "height": 512,
     "smoothing": false
   },
-  "baseUri": "https://ipfs.infura.io/ipfs/QmcWsCDAF1gAweA58ytVrGxFir784fjQfUPX2Xfc6rsmmS",
-  "description": "Remember to replace this description",
   "background": {
     "generate": true,
     "brightness": "80%",
@@ -66,7 +69,6 @@ module.exports = {
     "family": "Courier",
     "spacer": " => "
   },
-  "namePrefix": "Your Collection",
   "network": "eth",
   "solanaMetadata": {
     "symbol": "YC",
@@ -92,5 +94,6 @@ module.exports = {
     "quality": 100,
     "delay": 500,
     "imageName": "preview.gif"
-  }
+  },
+  "baseUri": "https://ipfsnerdservices.infura-ipfs.io/ipfs/QmZsHZgaxSWZsPte7utaKGFxZu6UBRM5TeekoMHCa23JRt/",
 };
